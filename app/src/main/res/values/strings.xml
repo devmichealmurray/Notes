@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="title_activity_navigation">Navigation Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_task">Tasks</string>
+    <string name="title_note">Notes</string>
+    <string name="notes_fragment">This is the notes fragment</string>
+    <string name="tasks_fragment">This is the tasks Fragment</string>
+    <string name="add_button_task">Add New Task</string>
+    <string name="add_button_note">Add New Note</string>
+</resources>
