@@ -3,7 +3,6 @@ package com.devmmurray.notes.navigation
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,24 +21,24 @@ class NavigationActivity : AppCompatActivity(),
     TasksListFragment.TouchActionDelegate,
     NotesListFragment.TouchActionDelegate {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView
-        .OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_tasks -> {
-                    val newInstance = TasksListFragment.newInstance().apply {
-                        replaceFragment(this)
-                    }
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_notes -> {
-                    val newInstance = NotesListFragment.newInstance().apply {
-                        replaceFragment(this)
-                    }
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
+//    private val mOnNavigationItemSelectedListener = BottomNavigationView
+//        .OnNavigationItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.navigation_tasks -> {
+//                    val newInstance = TasksListFragment.newInstance().apply {
+//                        replaceFragment(this)
+//                    }
+//                    return@OnNavigationItemSelectedListener true
+//                }
+//                R.id.navigation_notes -> {
+//                    val newInstance = NotesListFragment.newInstance().apply {
+//                        replaceFragment(this)
+//                    }
+//                    return@OnNavigationItemSelectedListener true
+//                }
+//            }
+//            false
+//        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +62,11 @@ class NavigationActivity : AppCompatActivity(),
         })
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_holder, fragment)
-            .commit()
-    }
+//    private fun replaceFragment(fragment: Fragment) {
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_holder, fragment)
+//            .commit()
+//    }
 
     override fun onAddButtonClicked(value: String) {
         goToCreateActivity(value)

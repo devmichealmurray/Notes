@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.devmmurray.notes.models.Note
 import kotlinx.android.synthetic.main.item_notes.view.*
 
-class NoteView@JvmOverloads constructor(
+class NoteView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 1

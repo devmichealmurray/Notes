@@ -1,7 +1,6 @@
 package com.devmmurray.notes.views
 
 import android.content.Context
-import android.graphics.Paint
 import android.util.AttributeSet
 import android.widget.CompoundButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +18,7 @@ class TodoView @JvmOverloads constructor(
         descriptionView.text = todo.description
         completedCheckBox.isChecked = todo.isComplete
 
-        if (todo.isComplete) createStrikeThrough()
+        if (todo.isComplete) descriptionView.setStrikeThrough()
         setUpCheckStateListener(todo, callback)
     }
 
@@ -28,20 +27,7 @@ class TodoView @JvmOverloads constructor(
             todo.isComplete = isChecked
 
             callback?.invoke(isChecked)
-            if (isChecked) createStrikeThrough() else removeStrikeThrough()
-        }
-    }
-
-    private fun createStrikeThrough() {
-        descriptionView.apply {
-            paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        }
-    }
-
-    private fun removeStrikeThrough() {
-        descriptionView.apply {
-            paintFlags = paintFlags and
-                    Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            if (isChecked) descriptionView.setStrikeThrough() else descriptionView.removeStrikeThrough()
         }
     }
 }

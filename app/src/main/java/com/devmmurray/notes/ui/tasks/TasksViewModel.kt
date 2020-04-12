@@ -3,16 +3,22 @@ package com.devmmurray.notes.ui.tasks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.devmmurray.notes.foundations.ApplicationScope
 import com.devmmurray.notes.models.Task
-import com.devmmurray.notes.models.Todo
+import toothpick.Toothpick
+import javax.inject.Inject
 
 class TasksViewModel : ViewModel(), TaskListViewContract {
+
+    @Inject
+    lateinit var localTasksModel: ITasksModel
 
     private val _taskListData: MutableLiveData<MutableList<Task>> = MutableLiveData()
     val taskListLiveData: LiveData<MutableList<Task>> = _taskListData
 
     init {
-        _taskListData.postValue(getFakeData())
+        Toothpick.inject(this, ApplicationScope.scope)
+        _taskListData.postValue(localTasksModel.getFakeTasksData())
     }
 
     override fun onTodoUpdated(taskIndex: Int, todoIndex: Int, isCompleted: Boolean) {
@@ -21,56 +27,5 @@ class TasksViewModel : ViewModel(), TaskListViewContract {
             ?.todos
             ?.get(todoIndex)
             ?.isComplete = isCompleted
-
     }
-
-    private fun getFakeData(): MutableList<Task> = mutableListOf(
-        Task(
-            "Task One", mutableListOf(
-                Todo("Todo Number One"),
-                Todo("Todo Number Two"),
-                Todo("Todo Number Three"),
-                Todo("Todo Number Four")
-            )
-        ),
-        Task(
-            "Task Two", mutableListOf(
-                Todo("Todo Number One"),
-                Todo("Todo Number Two"),
-                Todo("Todo Number Three"),
-                Todo("Todo Number Four")
-            )
-        ),
-        Task(
-            "Task Three", mutableListOf(
-                Todo("Todo Number One"),
-                Todo("Todo Number Two"),
-                Todo("Todo Number Three"),
-                Todo("Todo Number Four")
-            )
-        ),
-        Task(
-            "Task Four", mutableListOf(
-                Todo("Todo Number One"),
-                Todo("Todo Number Two"),
-                Todo("Todo Number Three"),
-                Todo("Todo Number Four")
-            )
-        ),
-        Task(
-            "Task Five", mutableListOf(
-                Todo("Todo Number One"),
-                Todo("Todo Number Two"),
-                Todo("Todo Number Three"),
-                Todo("Todo Number Four")
-            )
-        )
-    )
-
-    private val todoList = mutableListOf(
-        Todo("Todo Number One"),
-        Todo("Todo Number Two"),
-        Todo("Todo Number Three"),
-        Todo("Todo Number Four")
-    )
 }

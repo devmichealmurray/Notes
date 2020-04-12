@@ -3,27 +3,22 @@ package com.devmmurray.notes.ui.notes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.devmmurray.notes.foundations.ApplicationScope
 import com.devmmurray.notes.models.Note
+import toothpick.Toothpick
+import javax.inject.Inject
 
-class NotesViewModel : ViewModel() {
+class NotesViewModel : ViewModel(), NotesListViewContract {
+
+    @Inject
+    lateinit var localNotesModel: INotesModel
+
     private val _noteListLiveData: MutableLiveData<MutableList<Note>> = MutableLiveData()
     val noteListLiveData: LiveData<MutableList<Note>> = _noteListLiveData
 
     init {
-        _noteListLiveData.postValue(getFakeData())
+        Toothpick.inject(this, ApplicationScope.scope)
+        _noteListLiveData.postValue(localNotesModel.getFakeNotesData())
     }
 
-fun getFakeData(): MutableList<Note> = mutableListOf(
-    Note("Note One"),
-    Note("Note Two"),
-    Note("Note Three"),
-    Note("Note Four"),
-    Note("Note Five"),
-    Note("Note Six"),
-    Note("Note Seven"),
-    Note("Note Eight"),
-    Note("Note Nine"),
-    Note("Note Ten"),
-    Note("Note Eleven"),
-    Note("Note Twelve"))
 }

@@ -19,9 +19,10 @@ class NotesViewHolder(view: View) : BaseViewHolder<Note>(view) {
     }
 }
 
-class NotesAdapter(notesList: MutableList<Note> = mutableListOf(),
-val touchActionDelegate: NotesListFragment.TouchActionDelegate)
-    : BaseRecyclerAdapter<Note>(notesList) {
+class NotesAdapter(
+    notesList: MutableList<Note> = mutableListOf(),
+    val touchActionDelegate: NotesListFragment.TouchActionDelegate
+) : BaseRecyclerAdapter<Note>(notesList) {
 
     inner class AddButtonViewHolder(view: View) :
         com.devmmurray.notes.foundations.AddButtonViewHolder(view) {

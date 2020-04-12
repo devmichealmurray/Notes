@@ -11,4 +11,12 @@
     <string name="tasks_fragment">This is the tasks Fragment</string>
     <string name="add_button_task">Add New Task</string>
     <string name="add_button_note">Add New Note</string>
+    <string name="save">Save</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_your_new_task">Add Your New Task</string>
+    <string name="add_your_new_todo_here">Add Your New Todo Here</string>
+    <string name="could_not_save">Error! Could Not Save!</string>
+    <string name="add_your_new_note">Add Your New Note</string>
 </resources>

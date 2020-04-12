@@ -52,10 +52,6 @@ class TasksListFragment : Fragment() {
         })
     }
 
-    companion object {
-        fun newInstance() = TasksListFragment()
-    }
-
     interface TouchActionDelegate {
         fun onAddButtonClicked(value: String)
     }

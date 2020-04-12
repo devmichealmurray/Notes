@@ -8,22 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmmurray.notes.R
-import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesListFragment : Fragment() {
 
     private lateinit var notesViewModel: NotesViewModel
-    lateinit var touchActionDelegate: TouchActionDelegate
-    private lateinit var notesAdapter: NotesAdapter
+    private lateinit var touchActionDelegate: TouchActionDelegate
+    private lateinit var contentView: NotesListView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         context.let {
-            if (it is NotesListFragment.TouchActionDelegate) {
-                touchActionDelegate = it
-            }
+            if (it is TouchActionDelegate) touchActionDelegate = it
         }
     }
 
@@ -32,22 +28,28 @@ class NotesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_notes, container, false)
+        return inflater
+            .inflate(R.layout.fragment_notes, container, false)
+            .apply {
+                contentView = this as NotesListView
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        notes_recycler_view.layoutManager = LinearLayoutManager(context)
-        notesAdapter = NotesAdapter(touchActionDelegate = touchActionDelegate)
-        notes_recycler_view.adapter = notesAdapter
         notesViewModelBind()
+        setContentView()
+    }
+
+    private fun setContentView() {
+        contentView.initView(touchActionDelegate, notesViewModel)
     }
 
     private fun notesViewModelBind() {
         notesViewModel =
             ViewModelProvider(this).get(NotesViewModel::class.java)
         notesViewModel.noteListLiveData.observe(viewLifecycleOwner, Observer {
-            notesAdapter.updateList(it)
+            contentView.updateList(it)
         })
     }
 
@@ -55,7 +57,7 @@ class NotesListFragment : Fragment() {
         fun onAddButtonClicked(value: String)
     }
 
-    companion object {
-        fun newInstance() = NotesListFragment()
-    }
+//    companion object {
+//        fun newInstance() = NotesListFragment()
+//    }
 }
