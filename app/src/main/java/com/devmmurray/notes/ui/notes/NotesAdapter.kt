@@ -13,15 +13,11 @@ import com.devmmurray.notes.navigation.FRAGMENT_VALUE_NOTE
 import com.devmmurray.notes.views.NoteView
 import kotlinx.android.synthetic.main.view_add_button.view.*
 
-class NotesViewHolder(view: View) : BaseViewHolder<Note>(view) {
-    override fun onBind(data: Note, listIndex: Int) {
-        (view as NoteView).initView(data)
-    }
-}
 
 class NotesAdapter(
     notesList: MutableList<Note> = mutableListOf(),
-    val touchActionDelegate: NotesListFragment.TouchActionDelegate
+    val touchActionDelegate: NotesListFragment.TouchActionDelegate,
+    private val dataActionDelegate: NotesListViewContract
 ) : BaseRecyclerAdapter<Note>(notesList) {
 
     inner class AddButtonViewHolder(view: View) :
@@ -30,6 +26,16 @@ class NotesAdapter(
             view.buttonText.text = view.context.getString(R.string.add_button_note)
             view.setOnClickListener {
                 touchActionDelegate.onAddButtonClicked(FRAGMENT_VALUE_NOTE)
+            }
+        }
+    }
+
+    inner class NotesViewHolder(
+        view: View
+    ) : BaseViewHolder<Note>(view) {
+        override fun onBind(data: Note, listIndex: Int) {
+            (view as NoteView).initView(data) {
+                dataActionDelegate.onDeleteNote(masterList[listIndex])
             }
         }
     }

@@ -14,7 +14,7 @@ abstract class BaseViewHolder<E>(val view: View) : RecyclerView.ViewHolder(view)
 abstract class AddButtonViewHolder(view: View) : BaseViewHolder<Unit>(view)
 
 abstract class BaseRecyclerAdapter<T>(
-    private val masterList: MutableList<T> = mutableListOf()
+    val masterList: MutableList<T> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = masterList.size + 1

@@ -13,16 +13,20 @@ class TasksViewModel : ViewModel(), TaskListViewContract {
     @Inject
     lateinit var localTasksModel: ITasksModel
 
-    private val _taskListData: MutableLiveData<MutableList<Task>> = MutableLiveData()
-    val taskListLiveData: LiveData<MutableList<Task>> = _taskListData
+    private val _taskListLiveData: MutableLiveData<MutableList<Task>> = MutableLiveData()
+    val taskListLiveData: LiveData<MutableList<Task>> = _taskListLiveData
 
     init {
         Toothpick.inject(this, ApplicationScope.scope)
-        _taskListData.postValue(localTasksModel.getFakeTasksData())
+        loadData()
+    }
+
+    fun loadData() {
+        _taskListLiveData.postValue(localTasksModel.retrieveTasks().toMutableList())
     }
 
     override fun onTodoUpdated(taskIndex: Int, todoIndex: Int, isCompleted: Boolean) {
-        _taskListData.value
+        _taskListLiveData.value
             ?.get(taskIndex)
             ?.todos
             ?.get(todoIndex)

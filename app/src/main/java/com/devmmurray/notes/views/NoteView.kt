@@ -12,7 +12,10 @@ class NoteView @JvmOverloads constructor(
     defStyleAttr: Int = 1
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    fun initView(note: Note) {
+    fun initView(note: Note, closeButtonClickedCallback: () -> Unit) {
         notesView.text = note.description
+        closeButton.setOnClickListener {
+            closeButtonClickedCallback.invoke()
+        }
     }
 }

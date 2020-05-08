@@ -115,7 +115,7 @@ class CreateTaskFragment : Fragment() {
                                 .editableText
                                 .isNullOrEmpty()) {
                             todoList.add(
-                                Todo(containerView
+                                Todo(description = containerView
                                     .getChildAt(i)
                                     .todoEditText
                                     .editableText

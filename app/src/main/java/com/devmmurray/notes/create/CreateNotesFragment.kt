@@ -60,7 +60,7 @@ class CreateNotesFragment : Fragment(), NullFieldChecker {
     }
 
     private fun createNote(): Note? = if (!hasNullField())
-        Note(notesEditText.editableText.toString())
+        Note(description = notesEditText.editableText.toString())
     else null
 
     interface NotesOnFragmentInteractionListener {

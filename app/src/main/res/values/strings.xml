@@ -19,4 +19,5 @@
     <string name="add_your_new_todo_here">Add Your New Todo Here</string>
     <string name="could_not_save">Error! Could Not Save!</string>
     <string name="add_your_new_note">Add Your New Note</string>
+    <string name="tasksDAO_sql_query">SELECT * FROM tasks</string>
 </resources>
